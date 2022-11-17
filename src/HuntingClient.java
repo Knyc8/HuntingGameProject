@@ -15,21 +15,19 @@ public class HuntingClient {
             startBal = scan.nextLine();
         }
         if (startBal.equalsIgnoreCase("d")) {
-            HuntingGame newHunt = new HuntingGame();
-            hunt = newHunt;
+            hunt = new HuntingGame();
         }
         if (startBal.equalsIgnoreCase("c")) {
             System.out.println("Insert a custom balance: ");
             String cusBal = scan.nextLine();
-            while (isANumber(cusBal) == false)
+            while (!isANumber(cusBal))
             {
                 clearConsole();
                 System.out.println("Insert a number: ");
                 cusBal = scan.nextLine();
             }
 
-            HuntingGame newHunt = new HuntingGame(Double.parseDouble(cusBal));
-            hunt = newHunt;
+            hunt = new HuntingGame(Double.parseDouble(cusBal));
         }
 
         System.out.println("(H) to begin the hunt. (S) to enter the shop. (B) to check your balance. (I) to check your inventory.");
@@ -138,7 +136,7 @@ public class HuntingClient {
             return false;
         }
         try {
-            double d = Double.parseDouble(cusBal);
+            Double.parseDouble(cusBal);
         } catch (NumberFormatException ex) {
             return false;
         }
