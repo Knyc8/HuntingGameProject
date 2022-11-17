@@ -22,14 +22,20 @@ public class HuntingGame {
         balance += cashEarned;
     }
 
-    public List<String> getItems()
+    public List<String> getAllItems()
     {
         return items;
     }
 
-    public void updateItems(ArrayList items)
+    public String getItemsAtIndex(int index)
     {
-        items.add("cow");
+        String itemIndex = items.get(index);
+        return itemIndex;
+    }
+
+    public void updateItems(String newItem)
+    {
+        items.add(newItem);
     }
 
     //public string getFish() //returns the list of user's fish
