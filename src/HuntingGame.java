@@ -12,6 +12,11 @@ public class HuntingGame {
         balance  = 50;
     }
 
+    public HuntingGame(double startingbal)  //defaults the balance to user's input
+    {
+        balance  = startingbal;
+    }
+
     public double getBalance() //returns the current balance of the user
     {
         return balance;
@@ -37,6 +42,4 @@ public class HuntingGame {
     {
         items.add(newItem);
     }
-
-    //public string getFish() //returns the list of user's fish
 }

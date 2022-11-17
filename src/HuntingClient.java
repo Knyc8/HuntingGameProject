@@ -1,13 +1,36 @@
 import java.util.Scanner;
 
-public class HuntingRunner {
+public class HuntingClient {
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
         System.out.print("Enter a name: ");
         String username = scan.nextLine();
         System.out.println("Welcome, " + username);
+        System.out.println("Would you like to start with a default or custom balance? (D/C)");
+        String startBal = scan.nextLine();
         HuntingGame hunt = new HuntingGame();
-        HuntingStore store = new HuntingStore();
+        while (!startBal.equalsIgnoreCase("d") && !startBal.equalsIgnoreCase("c")) {
+            clearConsole();
+            System.out.println("Would you like to start with a default or custom balance? (D/C)");
+            startBal = scan.nextLine();
+        }
+        if (startBal.equalsIgnoreCase("d")) {
+            HuntingGame newHunt = new HuntingGame();
+            hunt = newHunt;
+        }
+        if (startBal.equalsIgnoreCase("c")) {
+            System.out.println("Insert a custom balance: ");
+            String cusBal = scan.nextLine();
+            while (isANumber(cusBal) == false)
+            {
+                clearConsole();
+                System.out.println("Insert a number: ");
+                cusBal = scan.nextLine();
+            }
+
+            HuntingGame newHunt = new HuntingGame(Double.parseDouble(cusBal));
+            hunt = newHunt;
+        }
 
         System.out.println("(H) to begin the hunt. (S) to enter the shop. (B) to check your balance. (I) to check your inventory.");
         String event = scan.nextLine();
@@ -85,6 +108,7 @@ public class HuntingRunner {
         while (!event.equalsIgnoreCase("H") && !event.equalsIgnoreCase("S") && !event.equalsIgnoreCase("B") && !event.equalsIgnoreCase("I")) {
             System.out.println("(H) to begin the hunt. (S) to enter the shop. (B) to check your balance. (I) to check your inventory.");
             event = scan.nextLine();
+            clearConsole();
         }
         return event;
     }
@@ -103,4 +127,22 @@ public class HuntingRunner {
             }
         }
     }
+
+    /***
+     *
+     * @param cusBal is a string that represents the inputted custom starting balance
+     * @return whether the string is numeric
+     */
+    public static boolean isANumber(String cusBal) {
+        if (cusBal == null) {
+            return false;
+        }
+        try {
+            double d = Double.parseDouble(cusBal);
+        } catch (NumberFormatException ex) {
+            return false;
+        }
+        return true;
+    }
+
 }
