@@ -1,7 +1,9 @@
+import java.awt.*;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class HuntingClient {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
         Scanner scan = new Scanner(System.in);
         System.out.print("Enter a name: ");
         String username = scan.nextLine();
@@ -43,8 +45,53 @@ public class HuntingClient {
                     clearConsole();
                     System.out.println("------------------------------");
                     System.out.println("You will now begin the hunt.");
+                    Thread.sleep(1000);
+                    clearConsole();
+                    String beast = hunt.getBeast();
+                    System.out.println("------------------------------");
+                    System.out.println("You come across a wild " + beast + ".");
+                    if (beast.equals("bird"))
+                    {
+                        int numShot = 3;
+                        int birdPos = (int) (Math.random() * 5) + 1;
+                        System.out.println("------------------------------");
+                        System.out.println("Pick a number between 1 to 5.");
+                        String skyGrid = "|?|?|?|?|?|";
+                        System.out.println(skyGrid);
+                        int guessShot = Integer.parseInt(scan.nextLine());
+                        while (!(guessShot == birdPos) && numShot > 1) {
+                            numShot--;
+                            clearConsole();
+                            skyGrid = hunt.huntBird(skyGrid, guessShot, birdPos);
+                            System.out.println("------------------------------");
+                            System.out.println(skyGrid);
+                            System.out.println("You missed!");
+                            System.out.println("You have " + numShot + " shot(s) left!");
+                            guessShot = Integer.parseInt(scan.nextLine());
+                        }
+                        clearConsole();
+                        if (guessShot == birdPos) {
+                            System.out.println("------------------------------");
+                            System.out.println(hunt.huntBird(skyGrid, guessShot, birdPos));
+                            System.out.println("You shot down a bird!");
+                            System.out.println("A bird is now placed in your inventory.");
+                        }
+                        else {
+                            System.out.println("------------------------------");
+                            System.out.println(hunt.huntBird(skyGrid, guessShot, birdPos));
+                            System.out.println("You ran out of shots!");
+                        }
+                    }
+                    if (beast.equals("bear"))
+                    {
+                        System.out.println("WIP Bear");
+                    }
+                    if (beast.equals("cryptid"))
+                    {
+                        System.out.println("WIP Cryptid");
+                    }
 
-                    System.out.println("Leave? (y)");
+                    System.out.println("\nLeave? (y)\nOr press any key to redo.");
                     exit = scan.nextLine();
                 }
                 event = "";
@@ -56,7 +103,7 @@ public class HuntingClient {
                     System.out.println("------------------------------");
                     System.out.println("You make your way into the shop.");
 
-                    System.out.println("Leave? (y)");
+                    System.out.println("\nLeave? (y)\nOr press any key to redo.");
                     exit = scan.nextLine();
                 }
                 event = "";
@@ -70,7 +117,7 @@ public class HuntingClient {
                     System.out.printf("You dig around and find $%.2f", hunt.getBalance());
                     System.out.println(".");
 
-                    System.out.println("Leave? (y)");
+                    System.out.println("\nLeave? (y)\nOr press any key to redo.");
                     exit = scan.nextLine();
                 }
                 event = "";
@@ -84,7 +131,7 @@ public class HuntingClient {
                     System.out.println("You open up your knapsack.");
                     System.out.println(hunt.getAllItems());
 
-                    System.out.println("Leave? (y)");
+                    System.out.println("\nLeave? (y)\nOr press any key to redo.");
                     exit = scan.nextLine();
                 }
                 event = "";
@@ -141,6 +188,20 @@ public class HuntingClient {
             return false;
         }
         return true;
+    }
+
+    /***
+     *
+     * @param start is an int that represents the number to count down from
+     * @throws InterruptedException allows the use of the Thread.sleep() method, which causes a delay
+     */
+    public static void countdown(int start) throws InterruptedException {
+        Thread.sleep(1000);
+        for (int i = start; i > 0; i--)
+        {
+            System.out.println(i);
+            Thread.sleep(1000);
+        }
     }
 
 }
