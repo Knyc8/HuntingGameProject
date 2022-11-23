@@ -11,13 +11,14 @@ public class HuntingClient {
         System.out.println("Would you like to start with a default or custom balance? (D/C)");
         String startBal = scan.nextLine();
         HuntingGame hunt = new HuntingGame();
+        HuntingStore store = new HuntingStore();
         while (!startBal.equalsIgnoreCase("d") && !startBal.equalsIgnoreCase("c")) {
             clearConsole();
             System.out.println("Would you like to start with a default or custom balance? (D/C)");
             startBal = scan.nextLine();
         }
         if (startBal.equalsIgnoreCase("d")) {
-            hunt = new HuntingGame();
+            store = new HuntingStore();
         }
         if (startBal.equalsIgnoreCase("c")) {
             System.out.println("Insert a custom balance: ");
@@ -29,7 +30,7 @@ public class HuntingClient {
                 cusBal = scan.nextLine();
             }
 
-            hunt = new HuntingGame(Double.parseDouble(cusBal));
+            store = new HuntingStore(Double.parseDouble(cusBal));
         }
 
         System.out.println("(H) to begin the hunt. (S) to enter the shop. (B) to check your balance. (I) to check your inventory.");
@@ -58,7 +59,24 @@ public class HuntingClient {
                         System.out.println("Pick a number between 1 to 5.");
                         String skyGrid = "|?|?|?|?|?|";
                         System.out.println(skyGrid);
-                        int guessShot = Integer.parseInt(scan.nextLine());
+                        String guess = scan.nextLine();
+                        while (!isANumber(guess) || !isAnInt(guess))
+                        {
+                            clearConsole();
+                            System.out.println("------------------------------");
+                            System.out.println("Please enter an integer.");
+                            System.out.println(skyGrid);
+                            guess = scan.nextLine();
+                        }
+                        int guessShot = Integer.parseInt(guess);
+                        while (guessShot < 1 || guessShot > 5 || !isAnInt(guess)) {
+                            clearConsole();
+                            System.out.println("------------------------------");
+                            System.out.println("Please enter an integer between 1 to 5");
+                            System.out.println(skyGrid);
+                            guess = scan.nextLine();
+                        }
+                        guessShot = Integer.parseInt(guess);
                         while (!(guessShot == birdPos) && numShot > 1) {
                             numShot--;
                             clearConsole();
@@ -67,7 +85,23 @@ public class HuntingClient {
                             System.out.println(skyGrid);
                             System.out.println("You missed!");
                             System.out.println("You have " + numShot + " shot(s) left!");
-                            guessShot = Integer.parseInt(scan.nextLine());
+                            guess = scan.nextLine();
+                            while (!isANumber(guess) || !isAnInt(guess))
+                            {
+                                clearConsole();
+                                System.out.println("------------------------------");
+                                System.out.println("Please enter an integer.");
+                                System.out.println(skyGrid);
+                                guess = scan.nextLine();
+                            }
+                            while (!isANumber(guess) || guessShot < 1 || guessShot > 5 || !isAnInt(guess)) {
+                                clearConsole();
+                                System.out.println("------------------------------");
+                                System.out.println("Please enter an integer between 1 to 5");
+                                System.out.println(skyGrid);
+                                guess = scan.nextLine();
+                            }
+                            guessShot = Integer.parseInt(guess);
                         }
                         clearConsole();
                         if (guessShot == birdPos) {
@@ -102,6 +136,10 @@ public class HuntingClient {
                     clearConsole();
                     System.out.println("------------------------------");
                     System.out.println("You make your way into the shop.");
+                    System.out.println(store);
+                    System.out.println("What would you like to buy or sell?");
+                    String transaction = scan.nextLine();
+                    System.out.println(store.canSell(transaction));
 
                     System.out.println("\nLeave? (y)\nOr press any key to redo.");
                     exit = scan.nextLine();
@@ -114,7 +152,7 @@ public class HuntingClient {
                     clearConsole();
                     System.out.println("------------------------------");
                     System.out.println("You open up your coin-sack.");
-                    System.out.printf("You dig around and find $%.2f", hunt.getBalance());
+                    System.out.printf("You dig around and find $%.2f", store.getBalance());
                     System.out.println(".");
 
                     System.out.println("\nLeave? (y)\nOr press any key to redo.");
@@ -129,7 +167,7 @@ public class HuntingClient {
                     clearConsole();
                     System.out.println("------------------------------");
                     System.out.println("You open up your knapsack.");
-                    System.out.println(hunt.getAllItems());
+                    System.out.println(store.getAllItems());
 
                     System.out.println("\nLeave? (y)\nOr press any key to redo.");
                     exit = scan.nextLine();
@@ -175,33 +213,31 @@ public class HuntingClient {
 
     /***
      *
-     * @param cusBal is a string that represents the inputted custom starting balance
+     * @param testStr is a string that represents the inputted custom starting balance
      * @return whether the string is numeric
      */
-    public static boolean isANumber(String cusBal) {
-        if (cusBal == null) {
+    public static boolean isANumber(String testStr) {
+        if (testStr == null) {
             return false;
         }
         try {
-            Double.parseDouble(cusBal);
+            Double.parseDouble(testStr);
         } catch (NumberFormatException ex) {
             return false;
         }
         return true;
     }
 
-    /***
-     *
-     * @param start is an int that represents the number to count down from
-     * @throws InterruptedException allows the use of the Thread.sleep() method, which causes a delay
-     */
-    public static void countdown(int start) throws InterruptedException {
-        Thread.sleep(1000);
-        for (int i = start; i > 0; i--)
-        {
-            System.out.println(i);
-            Thread.sleep(1000);
+    public static boolean isAnInt(String testStr) {
+        if (testStr == null) {
+            return false;
         }
+        try {
+            Integer.parseInt(testStr);
+        } catch (NumberFormatException ex) {
+            return false;
+        }
+        return true;
     }
 
 }
