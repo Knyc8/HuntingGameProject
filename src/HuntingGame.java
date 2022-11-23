@@ -26,7 +26,7 @@ public class HuntingGame {
         {
             return skyGrid.substring(0, 2 * guessShot - 1) + "X" + skyGrid.substring(2 * guessShot);
         }
-        HuntingStore.addItems("Bird");
+        HuntingStore.addHuntItems("Bird");
         return skyGrid.substring(0, 2 * guessShot - 1) + "O" + skyGrid.substring(2 * guessShot);
     }
 }

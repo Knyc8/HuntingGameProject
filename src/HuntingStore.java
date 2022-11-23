@@ -3,8 +3,8 @@ public class HuntingStore {
     public static
     /*variables*/
     double balance;
-    int i = 5;
-    static ArrayList<String> items = new ArrayList<String>();
+    static String items = "Hunt items: ";
+    String boughtItems = "Bought items: ";
 
     /*Constructors*/
     public HuntingStore()  //defaults the balance to $50
@@ -20,13 +20,20 @@ public class HuntingStore {
     /*methods*/
     public String toString()
     {
-        return "Sell:" +
-                "\nBird - $5" +
-                "\nBear - $10" +
-                "\nUnidentified object - $100" +
-                "\n\nBuy:" +
-                "\nFeather hat - $8" +
-                "\nBear skin rug - $15";
+        return """
+                ------------------------------
+                Sell:
+                Bird - $5
+                Bear - $10
+                Unidentified object - $100
+                ------------------------------
+                Buy:
+                1. Feather hat - $8
+                2. Bear-skin rug - $15
+                ------------------------------
+                Current balance: $"""+ String.format("%.2f", balance) +
+                "\nCurrent items: \n" + items + "\n" + boughtItems +
+                "\n------------------------------";
     }
 
     public double getBalance() //returns the current balance of the user
@@ -34,21 +41,80 @@ public class HuntingStore {
         return balance;
     }
 
-    public List<String> getAllItems() {
-        return items;
+    public void updateBal(double value)
+    {
+        balance += value;
     }
 
-    public static void addItems(String newItem) {
-        items.add(newItem);
+    public String getAllItems() {
+        return items + "\n" + boughtItems;
+    }
+
+    public static void addHuntItems(String newItem) {
+        items = items + newItem + ", ";
+    }
+
+    public void addBoughtItems(String newItem) {
+        boughtItems = boughtItems + newItem + ", ";
     }
 
     public boolean canSell(String hasItem)
     {
-        for (int i = 0; i < items.size(); i++) {
-            if ((items.get(i) + "").equalsIgnoreCase(hasItem)) {
+        for (int i = 0; i < items.length() - hasItem.length(); i++) {
+            String item = items.substring(i, i + hasItem.length());
+            if (item.equalsIgnoreCase(hasItem))
+            {
                 return true;
             }
         }
         return false;
+    }
+
+    public boolean canBuy(String buyItem)
+    {
+        if (buyItem.equals("1"))
+        {
+            if (balance >= 8)
+            {
+                return true;
+            }
+        }
+        if (buyItem.equals("2"))
+        {
+            if (balance >= 15)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public void sell(String sellItem)
+    {
+        if (sellItem.equalsIgnoreCase("bird")) {
+            updateBal(5);
+            for (int i = 0; i < items.length() - sellItem.length(); i++) {
+                String item = items.substring(i, i + sellItem.length());
+                if (item.equalsIgnoreCase(sellItem))
+                {
+                    items = items.substring(0, i) + items.substring(i + sellItem.length() + 2);
+                    break;
+                }
+            }
+        }
+    }
+
+    public void buy(String buyItem)
+    {
+        if (buyItem.equals("1"))
+        {
+            addBoughtItems("Feather hat");
+            updateBal(-8);
+        }
+        if (buyItem.equals("2"))
+        {
+            addBoughtItems("Bear-skin rug");
+            updateBal(-15);
+        }
     }
 }

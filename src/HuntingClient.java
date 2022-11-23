@@ -1,5 +1,3 @@
-import java.awt.*;
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class HuntingClient {
@@ -11,7 +9,7 @@ public class HuntingClient {
         System.out.println("Would you like to start with a default or custom balance? (D/C)");
         String startBal = scan.nextLine();
         HuntingGame hunt = new HuntingGame();
-        HuntingStore store = new HuntingStore();
+        HuntingStore store =  new HuntingStore();
         while (!startBal.equalsIgnoreCase("d") && !startBal.equalsIgnoreCase("c")) {
             clearConsole();
             System.out.println("Would you like to start with a default or custom balance? (D/C)");
@@ -60,7 +58,7 @@ public class HuntingClient {
                         String skyGrid = "|?|?|?|?|?|";
                         System.out.println(skyGrid);
                         String guess = scan.nextLine();
-                        while (!isANumber(guess) || !isAnInt(guess))
+                        while (!isAnInt(guess))
                         {
                             clearConsole();
                             System.out.println("------------------------------");
@@ -69,14 +67,14 @@ public class HuntingClient {
                             guess = scan.nextLine();
                         }
                         int guessShot = Integer.parseInt(guess);
-                        while (guessShot < 1 || guessShot > 5 || !isAnInt(guess)) {
+                        while ((guessShot < 1 || guessShot > 5) || !isAnInt(guess)) {
                             clearConsole();
                             System.out.println("------------------------------");
                             System.out.println("Please enter an integer between 1 to 5");
                             System.out.println(skyGrid);
                             guess = scan.nextLine();
+                            guessShot = Integer.parseInt(guess);
                         }
-                        guessShot = Integer.parseInt(guess);
                         while (!(guessShot == birdPos) && numShot > 1) {
                             numShot--;
                             clearConsole();
@@ -86,15 +84,7 @@ public class HuntingClient {
                             System.out.println("You missed!");
                             System.out.println("You have " + numShot + " shot(s) left!");
                             guess = scan.nextLine();
-                            while (!isANumber(guess) || !isAnInt(guess))
-                            {
-                                clearConsole();
-                                System.out.println("------------------------------");
-                                System.out.println("Please enter an integer.");
-                                System.out.println(skyGrid);
-                                guess = scan.nextLine();
-                            }
-                            while (!isANumber(guess) || guessShot < 1 || guessShot > 5 || !isAnInt(guess)) {
+                            while (!isAnInt(guess) || Integer.parseInt(guess) < 1 || Integer.parseInt(guess) > 5) {
                                 clearConsole();
                                 System.out.println("------------------------------");
                                 System.out.println("Please enter an integer between 1 to 5");
@@ -137,9 +127,22 @@ public class HuntingClient {
                     System.out.println("------------------------------");
                     System.out.println("You make your way into the shop.");
                     System.out.println(store);
-                    System.out.println("What would you like to buy or sell?");
+                    System.out.println("Enter the name of the item to sell or enter a number to buy. \nWhat would you like to buy or sell?");
                     String transaction = scan.nextLine();
-                    System.out.println(store.canSell(transaction));
+                    if (store.canSell(transaction)) {
+                        store.sell(transaction);
+                        System.out.println("Transaction Successful");
+                    }
+                    else if (store.canBuy(transaction))
+                    {
+                        System.out.println(store.canBuy(transaction));
+                        store.buy(transaction);
+                        System.out.println("Transaction Successful!");
+                    }
+                    else
+                    {
+                        System.out.println("Transaction failed.");
+                    }
 
                     System.out.println("\nLeave? (y)\nOr press any key to redo.");
                     exit = scan.nextLine();
