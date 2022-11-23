@@ -32,7 +32,7 @@ public class HuntingStore {
                 2. Bear-skin rug - $15
                 ------------------------------
                 Current balance: $"""+ String.format("%.2f", balance) +
-                "\nCurrent items: \n" + items + "\n" + boughtItems +
+                "\n" + items + "\n" + boughtItems +
                 "\n------------------------------";
     }
 
