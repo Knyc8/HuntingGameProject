@@ -58,7 +58,7 @@ public class HuntingClient {
                         String skyGrid = "|?|?|?|?|?|";
                         System.out.println(skyGrid);
                         String guess = scan.nextLine();
-                        while (!isAnInt(guess))
+                        while (isAnInt(guess))
                         {
                             clearConsole();
                             System.out.println("------------------------------");
@@ -67,7 +67,7 @@ public class HuntingClient {
                             guess = scan.nextLine();
                         }
                         int guessShot = Integer.parseInt(guess);
-                        while ((guessShot < 1 || guessShot > 5) || !isAnInt(guess)) {
+                        while ((guessShot < 1 || guessShot > 5) || isAnInt(guess)) {
                             clearConsole();
                             System.out.println("------------------------------");
                             System.out.println("Please enter an integer between 1 to 5");
@@ -84,7 +84,7 @@ public class HuntingClient {
                             System.out.println("You missed!");
                             System.out.println("You have " + numShot + " shot(s) left!");
                             guess = scan.nextLine();
-                            while (!isAnInt(guess) || Integer.parseInt(guess) < 1 || Integer.parseInt(guess) > 5) {
+                            while (isAnInt(guess) || Integer.parseInt(guess) < 1 || Integer.parseInt(guess) > 5) {
                                 clearConsole();
                                 System.out.println("------------------------------");
                                 System.out.println("Please enter an integer between 1 to 5");
@@ -135,7 +135,6 @@ public class HuntingClient {
                     }
                     else if (store.canBuy(transaction))
                     {
-                        System.out.println(store.canBuy(transaction));
                         store.buy(transaction);
                         System.out.println("Transaction Successful!");
                     }
@@ -233,14 +232,14 @@ public class HuntingClient {
 
     public static boolean isAnInt(String testStr) {
         if (testStr == null) {
-            return false;
+            return true;
         }
         try {
             Integer.parseInt(testStr);
         } catch (NumberFormatException ex) {
-            return false;
+            return true;
         }
-        return true;
+        return false;
     }
 
 }

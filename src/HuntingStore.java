@@ -1,4 +1,3 @@
-import java.util.*;
 public class HuntingStore {
     public static
     /*variables*/
@@ -74,17 +73,11 @@ public class HuntingStore {
     {
         if (buyItem.equals("1"))
         {
-            if (balance >= 8)
-            {
-                return true;
-            }
+            return (balance >= 8);
         }
         if (buyItem.equals("2"))
         {
-            if (balance >= 15)
-            {
-                return true;
-            }
+            return  (balance >= 15);
         }
         return false;
     }

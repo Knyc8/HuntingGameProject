@@ -3,7 +3,7 @@ public class HuntingGame {
 
     public String getBeast() {
         int beastChance = (int) (Math.random() * 15) + 1;
-        String beastType = "";
+        String beastType;
         if (beastChance <= 10)
         {
             beastType = "bird";
