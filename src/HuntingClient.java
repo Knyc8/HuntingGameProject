@@ -58,7 +58,7 @@ public class HuntingClient {
                         String skyGrid = "|?|?|?|?|?|";
                         System.out.println(skyGrid);
                         String guess = scan.nextLine();
-                        while (!guess.equals("1") || !guess.equals("2") || !guess.equals("3") || !guess.equals("4") || !guess.equals("5"))
+                        while (!guess.equals("1") && !guess.equals("2") && !guess.equals("3") && !guess.equals("4") && !guess.equals("5"))
                         {
                             clearConsole();
                             System.out.println("------------------------------");
@@ -76,7 +76,7 @@ public class HuntingClient {
                             System.out.println("You missed!");
                             System.out.println("You have " + numShot + " shot(s) left!");
                             guess = scan.nextLine();
-                            while (!guess.equals("1") || !guess.equals("2") || !guess.equals("3") || !guess.equals("4") || !guess.equals("5"))
+                            while (!guess.equals("1") && !guess.equals("2") && !guess.equals("3") && !guess.equals("4") && !guess.equals("5"))
                             {
                                 clearConsole();
                                 System.out.println("------------------------------");
