@@ -29,4 +29,7 @@ public class HuntingGame {
         HuntingStore.addHuntItems("Bird");
         return skyGrid.substring(0, 2 * guessShot - 1) + "O" + skyGrid.substring(2 * guessShot);
     }
+
+    //bear-related code:
+
 }

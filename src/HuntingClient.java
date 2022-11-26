@@ -58,23 +58,15 @@ public class HuntingClient {
                         String skyGrid = "|?|?|?|?|?|";
                         System.out.println(skyGrid);
                         String guess = scan.nextLine();
-                        while (isAnInt(guess))
+                        while (!guess.equals("1") || !guess.equals("2") || !guess.equals("3") || !guess.equals("4") || !guess.equals("5"))
                         {
                             clearConsole();
                             System.out.println("------------------------------");
-                            System.out.println("Please enter an integer.");
+                            System.out.println("Please enter an integer between 1 to 5.");
                             System.out.println(skyGrid);
                             guess = scan.nextLine();
                         }
                         int guessShot = Integer.parseInt(guess);
-                        while ((guessShot < 1 || guessShot > 5) || isAnInt(guess)) {
-                            clearConsole();
-                            System.out.println("------------------------------");
-                            System.out.println("Please enter an integer between 1 to 5");
-                            System.out.println(skyGrid);
-                            guess = scan.nextLine();
-                            guessShot = Integer.parseInt(guess);
-                        }
                         while (!(guessShot == birdPos) && numShot > 1) {
                             numShot--;
                             clearConsole();
@@ -84,15 +76,16 @@ public class HuntingClient {
                             System.out.println("You missed!");
                             System.out.println("You have " + numShot + " shot(s) left!");
                             guess = scan.nextLine();
-                            while (isAnInt(guess) || Integer.parseInt(guess) < 1 || Integer.parseInt(guess) > 5) {
+                            while (!guess.equals("1") || !guess.equals("2") || !guess.equals("3") || !guess.equals("4") || !guess.equals("5"))
+                            {
                                 clearConsole();
                                 System.out.println("------------------------------");
-                                System.out.println("Please enter an integer between 1 to 5");
+                                System.out.println("Please enter an integer between 1 to 5.");
                                 System.out.println(skyGrid);
                                 guess = scan.nextLine();
                             }
                             guessShot = Integer.parseInt(guess);
-                        }
+                            }
                         clearConsole();
                         if (guessShot == birdPos) {
                             System.out.println("------------------------------");
@@ -108,7 +101,7 @@ public class HuntingClient {
                     }
                     if (beast.equals("bear"))
                     {
-                        System.out.println("WIP Bear");
+                        System.out.println("You encounter a Bear");
                     }
                     if (beast.equals("cryptid"))
                     {
