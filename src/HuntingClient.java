@@ -122,18 +122,24 @@ public class HuntingClient {
                     System.out.println(store);
                     System.out.println("Enter the name of the item to sell or enter a number to buy. \nWhat would you like to buy or sell?");
                     String transaction = scan.nextLine();
-                    if (store.canSell(transaction)) {
+                    if (store.canSell(transaction) && !transaction.equals("")) {
                         store.sell(transaction);
-                        System.out.println("Transaction Successful");
+                        System.out.println("***************************");
+                        System.out.println("* Transaction Successful! *");
+                        System.out.println("***************************");
                     }
-                    else if (store.canBuy(transaction))
+                    else if (store.canBuy(transaction) && !transaction.equals(""))
                     {
                         store.buy(transaction);
-                        System.out.println("Transaction Successful!");
+                        System.out.println("***************************");
+                        System.out.println("* Transaction Successful! *");
+                        System.out.println("***************************");
                     }
                     else
                     {
-                        System.out.println("Transaction failed.");
+                        System.out.println("***********************");
+                        System.out.println("* Transaction failed! *");
+                        System.out.println("***********************");
                     }
 
                     System.out.println("\nLeave? (y)\nOr press any key to redo.");
@@ -222,17 +228,4 @@ public class HuntingClient {
         }
         return true;
     }
-
-    public static boolean isAnInt(String testStr) {
-        if (testStr == null) {
-            return true;
-        }
-        try {
-            Integer.parseInt(testStr);
-        } catch (NumberFormatException ex) {
-            return true;
-        }
-        return false;
-    }
-
 }

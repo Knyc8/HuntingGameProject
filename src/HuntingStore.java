@@ -2,7 +2,7 @@ public class HuntingStore {
     public static
     /*variables*/
     double balance;
-    static String items = "Hunt items: ";
+    static String items = "Hunt items: Bird, Bear, Cryptid Evidence, ";
     String boughtItems = "Bought items: ";
 
     /*Constructors*/
@@ -24,7 +24,7 @@ public class HuntingStore {
                 Sell:
                 Bird - $5
                 Bear - $10
-                Unidentified object - $100
+                Cryptid Evidence - $100
                 ------------------------------
                 Buy:
                 1. Feather hat - $8
@@ -86,6 +86,28 @@ public class HuntingStore {
     {
         if (sellItem.equalsIgnoreCase("bird")) {
             updateBal(5);
+            for (int i = 0; i < items.length() - sellItem.length(); i++) {
+                String item = items.substring(i, i + sellItem.length());
+                if (item.equalsIgnoreCase(sellItem))
+                {
+                    items = items.substring(0, i) + items.substring(i + sellItem.length() + 2);
+                    break;
+                }
+            }
+        }
+        if (sellItem.equalsIgnoreCase("bear")) {
+            updateBal(10);
+            for (int i = 0; i < items.length() - sellItem.length(); i++) {
+                String item = items.substring(i, i + sellItem.length());
+                if (item.equalsIgnoreCase(sellItem))
+                {
+                    items = items.substring(0, i) + items.substring(i + sellItem.length() + 2);
+                    break;
+                }
+            }
+        }
+        if (sellItem.equalsIgnoreCase("Cryptid Evidence")) {
+            updateBal(100);
             for (int i = 0; i < items.length() - sellItem.length(); i++) {
                 String item = items.substring(i, i + sellItem.length());
                 if (item.equalsIgnoreCase(sellItem))

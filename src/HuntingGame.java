@@ -1,6 +1,10 @@
 public class HuntingGame {
     //default constructor
 
+    /***
+     * Simulates a random number generator between 1 and 15
+     * @return either "bird", "bear", or "cryptid" based on the number chosen by the Random method
+     */
     public String getBeast() {
         int beastChance = (int) (Math.random() * 15) + 1;
         String beastType;
