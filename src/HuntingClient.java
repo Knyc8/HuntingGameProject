@@ -51,6 +51,7 @@ public class HuntingClient {
                     System.out.println("You come across a wild " + beast + ".");
                     if (beast.equals("bird"))
                     {
+                        hunt.updateNumhunts();
                         int numShot = 3;
                         int birdPos = (int) (Math.random() * 5) + 1;
                         System.out.println("------------------------------");
@@ -101,10 +102,45 @@ public class HuntingClient {
                     }
                     if (beast.equals("bear"))
                     {
-                        System.out.println("You encounter a Bear");
+                        hunt.updateNumhunts();
+                        hunt.resetStats();
+                        while (hunt.getBearHp() > 0 && hunt.getPlayerHp() > 0) {
+                            System.out.println(hunt.bearFight());
+                            System.out.println("Attack (A) or Defend (D)? ");
+                            String playerMove = scan.nextLine();
+                            while (!playerMove.equalsIgnoreCase("D") && !playerMove.equalsIgnoreCase("A"))
+                            {
+                                clearConsole();
+                                System.out.println("------------------------------");
+                                System.out.println(hunt.bearFight());
+                                System.out.println("Attack (A) or Defend (D)? ");
+                                playerMove = scan.nextLine();
+                            }
+                            if (playerMove.equalsIgnoreCase("D")) {
+                                hunt.bearAttack();
+
+                                clearConsole();
+                                System.out.println("------------------------------");
+                                hunt.block();
+                                System.out.println("You blocked " + hunt.getBeastDmg() + " damage!");
+                            }
+                            else {
+                                hunt.attack();
+                                hunt.bearAttack();
+                                hunt.updateBearStats();
+                                hunt.updatePlayerStats();
+
+                                clearConsole();
+                                System.out.println("------------------------------");
+                                System.out.println("The bear dealt " + hunt.getBeastDmg() + " damage!");
+                                System.out.println("You dealt " + hunt.getPlayerDmg() + " damage!");
+                            }
+                        }
+                        System.out.println(hunt.bearFight());
                     }
                     if (beast.equals("cryptid"))
                     {
+                        hunt.updateNumhunts();
                         System.out.println("WIP Cryptid");
                     }
 
@@ -167,6 +203,7 @@ public class HuntingClient {
                 {
                     clearConsole();
                     System.out.println("------------------------------");
+                    System.out.println("Number of hunts completed: " + hunt.getNumHunts());
                     System.out.println("You open up your knapsack.");
                     System.out.println(store.getAllItems());
 

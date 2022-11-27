@@ -1,9 +1,8 @@
 public class HuntingStore {
-    public static
     /*variables*/
-    double balance;
-    static String items = "Hunt items: Bird, Bear, Cryptid Evidence, ";
-    String boughtItems = "Bought items: ";
+    private static double balance;
+    private static String items = "Hunt items: ";
+    private String boughtItems = "Bought items: ";
 
     /*Constructors*/
     public HuntingStore()  //defaults the balance to $50
@@ -30,7 +29,7 @@ public class HuntingStore {
                 1. Feather hat - $8
                 2. Bear-skin rug - $15
                 ------------------------------
-                Current balance: $"""+ String.format("%.2f", balance) +
+                "Current balance: $""" + String.format("%.2f", balance) +
                 "\n" + items + "\n" + boughtItems +
                 "\n------------------------------";
     }
