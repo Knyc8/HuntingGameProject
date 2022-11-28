@@ -30,7 +30,7 @@ public class HuntingStore {
                 2. Bear-skin rug - $15
                 3. Preserved Cryptid Remains - $200
                 ------------------------------
-                Current balance: $""" + String.format("%.2f", balance) +
+                Current balance: """ + HuntingClient.ANSI_GREEN + String.format("$%.2f", balance) + HuntingClient.ANSI_RESET +
                 "\n" + items + "\n" + boughtItems +
                 "\n------------------------------";
     }

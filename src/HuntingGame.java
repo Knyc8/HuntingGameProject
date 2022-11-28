@@ -27,7 +27,7 @@ public class HuntingGame {
     public String getBeast() {
         int beastChance = (int) (Math.random() * 15) + 1;
         String beastType = "cryptid";
-        /*if (beastChance <= 10)
+        if (beastChance <= 10)
         {
             beastType = "bird";
         }
@@ -38,7 +38,7 @@ public class HuntingGame {
         else
         {
             beastType = "cryptid";
-        }*/
+        }
         return beastType;
     }
 
@@ -114,22 +114,22 @@ public class HuntingGame {
     {
         if (playerHp <= 0) {
             playerHp = 0;
-            return "Bear health: " + bearHp +
-                    "\nYour health: " + playerHp +
+            return "Bear health: " + HuntingClient.ANSI_GREEN + bearHp + HuntingClient.ANSI_RESET +
+                    "\nYour health: " + HuntingClient.ANSI_GREEN + playerHp + HuntingClient.ANSI_RESET +
                     "\nYou collapse onto the floor." +
                     "\nThe bear runs away.";
         }
         else if (bearHp <= 0) {
             bearHp = 0;
             HuntingStore.addHuntItems("Bear");
-            return "Bear health: " + bearHp +
-                    "\nYour health: " + playerHp +
+            return "Bear health: " + HuntingClient.ANSI_GREEN + bearHp + HuntingClient.ANSI_RESET +
+                    "\nYour health: " + HuntingClient.ANSI_GREEN + playerHp + HuntingClient.ANSI_RESET +
                     "\nThe bear collapses onto the floor." +
-                    "\nA bear is added to your inventory.";
+                    "\nA " + HuntingClient.ANSI_YELLOW + "bear" + HuntingClient.ANSI_RESET + " is added to your inventory.";
         }
         else {
-            return "Bear health: " + bearHp +
-                    "\nYour health: " + playerHp;
+            return "Bear health: " + HuntingClient.ANSI_GREEN + bearHp + HuntingClient.ANSI_RESET +
+                    "\nYour health: " + HuntingClient.ANSI_GREEN + playerHp + HuntingClient.ANSI_RESET;
         }
     }
 
@@ -164,8 +164,8 @@ public class HuntingGame {
         if (playerHp <= 0) {
             playerHp = 0;
             HuntingStore.updateBal(-HuntingStore.getBalance() / 2);
-            return "Cryptid health: " + cryptidHp +
-                    "\nYour health: " + playerHp +
+            return "Cryptid health: " + HuntingClient.ANSI_GREEN + cryptidHp + HuntingClient.ANSI_RESET +
+                    "\nYour health: " + HuntingClient.ANSI_GREEN + playerHp + HuntingClient.ANSI_RESET +
                     "\nYou collapse onto the floor." +
                     "\nThe cryptid consumes you." +
                     "\nYour balance is now halved.";
@@ -173,14 +173,14 @@ public class HuntingGame {
         else if (cryptidHp <= 0) {
             cryptidHp = 0;
             HuntingStore.addHuntItems("Cryptid Evidence");
-            return "Cryptid health: " + cryptidHp +
-                    "\nYour health: " + playerHp +
+            return "Cryptid health: " + HuntingClient.ANSI_GREEN + cryptidHp + HuntingClient.ANSI_RESET +
+                    "\nYour health: " + HuntingClient.ANSI_GREEN + playerHp + HuntingClient.ANSI_RESET +
                     "\nThe cryptid falls to the ground." +
-                    "\nA piece of cryptid evidence is added to your inventory.";
+                    "\nA piece of " + HuntingClient.ANSI_YELLOW + "cryptid evidence" + HuntingClient.ANSI_RESET + " is added to your inventory.";
         }
         else {
-            return "Cryptid health: " + cryptidHp +
-                    "\nYour health: " + playerHp;
+            return "Cryptid health: " + HuntingClient.ANSI_GREEN + cryptidHp + HuntingClient.ANSI_RESET +
+                    "\nYour health: " + HuntingClient.ANSI_GREEN + playerHp + HuntingClient.ANSI_RESET;
         }
     }
 

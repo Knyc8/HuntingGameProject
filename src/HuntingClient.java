@@ -1,6 +1,13 @@
 import java.util.Scanner;
 
 public class HuntingClient {
+    /*Colored text*/
+    static final String ANSI_RESET = "\u001B[0m";
+    static final String ANSI_RED = "\u001B[31m";
+    static final String ANSI_GREEN = "\u001B[32m";
+    static final String ANSI_YELLOW = "\u001B[33m";
+    static final String ANSI_CYAN = "\u001B[36m";
+
     public static void main(String[] args) throws InterruptedException {
         Scanner scan = new Scanner(System.in);
         System.out.print("Enter a name: ");
@@ -74,7 +81,7 @@ public class HuntingClient {
                             skyGrid = hunt.huntBird(skyGrid, guessShot, birdPos);
                             System.out.println("------------------------------");
                             System.out.println(skyGrid);
-                            System.out.println("You missed!");
+                            System.out.println("You " + ANSI_RED + "missed" + ANSI_RESET + "!");
                             System.out.println("You have " + numShot + " shot(s) left!");
                             guess = scan.nextLine();
                             while (!guess.equals("1") && !guess.equals("2") && !guess.equals("3") && !guess.equals("4") && !guess.equals("5"))
@@ -92,7 +99,7 @@ public class HuntingClient {
                             System.out.println("------------------------------");
                             System.out.println(hunt.huntBird(skyGrid, guessShot, birdPos));
                             System.out.println("You shot down a bird!");
-                            System.out.println("A bird is now placed in your inventory.");
+                            System.out.println("A " + ANSI_YELLOW + "bird" + ANSI_RESET + " is now placed in your inventory.");
                         }
                         else {
                             System.out.println("------------------------------");
@@ -113,14 +120,14 @@ public class HuntingClient {
                         hunt.resetStats();
                         while (hunt.getBearHp() > 0 && hunt.getPlayerHp() > 0) {
                             System.out.println(hunt.bearFight());
-                            System.out.println("Attack (A) or Defend (D)? ");
+                            System.out.println("Attack " + ANSI_RED + "(A)" + ANSI_RESET + " or Defend " + ANSI_CYAN + "(D)" + ANSI_RESET + "?");
                             String playerMove = scan.nextLine();
                             while (!playerMove.equalsIgnoreCase("D") && !playerMove.equalsIgnoreCase("A"))
                             {
                                 clearConsole();
                                 System.out.println("------------------------------");
                                 System.out.println(hunt.bearFight());
-                                System.out.println("Attack (A) or Defend (D)? ");
+                                System.out.println("Attack " + ANSI_RED + "(A)" + ANSI_RESET + " or Defend " + ANSI_CYAN + "(D)" + ANSI_RESET + "?");
                                 playerMove = scan.nextLine();
                             }
                             if (playerMove.equalsIgnoreCase("D")) {
@@ -129,7 +136,7 @@ public class HuntingClient {
                                 clearConsole();
                                 System.out.println("------------------------------");
                                 hunt.block();
-                                System.out.println("You blocked " + hunt.getBeastDmg() + " damage!");
+                                System.out.println("You blocked " + ANSI_CYAN + hunt.getBeastDmg() + ANSI_RESET + " damage!");
                             }
                             else {
                                 hunt.attack();
@@ -139,8 +146,8 @@ public class HuntingClient {
 
                                 clearConsole();
                                 System.out.println("------------------------------");
-                                System.out.println("The bear dealt " + hunt.getBeastDmg() + " damage!");
-                                System.out.println("You dealt " + hunt.getPlayerDmg() + " damage!");
+                                System.out.println("The bear dealt " + ANSI_RED + hunt.getBeastDmg() + ANSI_RESET + " damage!");
+                                System.out.println("You dealt " + ANSI_RED + hunt.getPlayerDmg()+ ANSI_RESET + " damage!");
                             }
                         }
                         System.out.println(hunt.bearFight());
@@ -158,14 +165,14 @@ public class HuntingClient {
                         hunt.resetStats();
                         while (hunt.getCryptidHp() > 0 && hunt.getPlayerHp() > 0) {
                             System.out.println(hunt.cryptidFight());
-                            System.out.println("Attack (A) or Defend (D)? ");
+                            System.out.println("Attack " + ANSI_RED + "(A)" + ANSI_RESET + " or Defend " + ANSI_CYAN + "(D)" + ANSI_RESET + "?");
                             String playerMove = scan.nextLine();
                             while (!playerMove.equalsIgnoreCase("D") && !playerMove.equalsIgnoreCase("A"))
                             {
                                 clearConsole();
                                 System.out.println("------------------------------");
                                 System.out.println(hunt.cryptidFight());
-                                System.out.println("Attack (A) or Defend (D)? ");
+                                System.out.println("Attack " + ANSI_RED + "(A)" + ANSI_RESET + " or Defend " + ANSI_CYAN + "(D)" + ANSI_RESET + "?");
                                 playerMove = scan.nextLine();
                             }
                             if (playerMove.equalsIgnoreCase("D")) {
@@ -174,7 +181,7 @@ public class HuntingClient {
                                 clearConsole();
                                 System.out.println("------------------------------");
                                 hunt.block();
-                                System.out.println("You blocked " + hunt.getBeastDmg() + " damage!");
+                                System.out.println("You blocked " + ANSI_CYAN + hunt.getBeastDmg() + ANSI_RESET + " damage!");
                             }
                             else {
                                 hunt.attack();
@@ -184,8 +191,8 @@ public class HuntingClient {
 
                                 clearConsole();
                                 System.out.println("------------------------------");
-                                System.out.println("The cryptid dealt " + hunt.getBeastDmg() + " damage!");
-                                System.out.println("You dealt " + hunt.getPlayerDmg() + " damage!");
+                                System.out.println("The cryptid dealt " + ANSI_RED + hunt.getBeastDmg() + ANSI_RESET + " damage!");
+                                System.out.println("You dealt " + ANSI_RED + hunt.getPlayerDmg() + ANSI_RESET + " damage!");
                             }
                         }
                         System.out.println(hunt.cryptidFight());
@@ -207,22 +214,22 @@ public class HuntingClient {
                     String transaction = scan.nextLine();
                     if (store.canSell(transaction) && !transaction.equals("")) {
                         store.sell(transaction);
-                        System.out.println("***************************");
+                        System.out.println(ANSI_GREEN + "***************************");
                         System.out.println("* Transaction Successful! *");
-                        System.out.println("***************************");
+                        System.out.println("***************************" + ANSI_RESET);
                     }
                     else if (store.canBuy(transaction) && !transaction.equals(""))
                     {
                         store.buy(transaction);
-                        System.out.println("***************************");
+                        System.out.println(ANSI_GREEN + "***************************");
                         System.out.println("* Transaction Successful! *");
-                        System.out.println("***************************");
+                        System.out.println("***************************" + ANSI_RESET);
                     }
                     else
                     {
-                        System.out.println("***********************");
+                        System.out.println(ANSI_RED + "***********************");
                         System.out.println("* Transaction failed! *");
-                        System.out.println("***********************");
+                        System.out.println("***********************" + ANSI_RESET);
                     }
 
                     System.out.println("\nLeave? (y)\nOr press any key to redo.");
@@ -236,8 +243,8 @@ public class HuntingClient {
                     clearConsole();
                     System.out.println("------------------------------");
                     System.out.println("You open up your coin-sack.");
-                    System.out.printf("You dig around and find $%.2f", store.getBalance());
-                    System.out.println(".");
+                    System.out.printf("You dig around and find " + ANSI_GREEN + "$%.2f", store.getBalance());
+                    System.out.println(ANSI_RESET + ".");
 
                     System.out.println("\nLeave? (y)\nOr press any key to redo.");
                     exit = scan.nextLine();
