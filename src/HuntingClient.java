@@ -102,6 +102,13 @@ public class HuntingClient {
                     }
                     if (beast.equals("bear"))
                     {
+                        System.out.println("""
+                        Info:
+                        You have 10 hit points.
+                        You have a 1/2 chance of dealing 1 damage, 1/3 chance of dealing 3, and a 1/6 chance of dealing 10.
+                        The bear has 20 hit points.
+                        It has a 2/3 chance of dealing 1 damage, and a 1/3 chance of dealing 2.
+                        """);
                         hunt.updateNumhunts();
                         hunt.resetStats();
                         while (hunt.getBearHp() > 0 && hunt.getPlayerHp() > 0) {
@@ -140,8 +147,48 @@ public class HuntingClient {
                     }
                     if (beast.equals("cryptid"))
                     {
+                        System.out.println("""
+                        Info:
+                        The player has 10 hit points.
+                        You have a 1/2 chance of dealing 1 damage, 1/3 chance of dealing 3, and a 1/6 chance of dealing 10.
+                        The cryptid has 40 hit points.
+                        It has a 1/6 chance of dealing 5 damage to the player.
+                        """);
                         hunt.updateNumhunts();
-                        System.out.println("WIP Cryptid");
+                        hunt.resetStats();
+                        while (hunt.getCryptidHp() > 0 && hunt.getPlayerHp() > 0) {
+                            System.out.println(hunt.cryptidFight());
+                            System.out.println("Attack (A) or Defend (D)? ");
+                            String playerMove = scan.nextLine();
+                            while (!playerMove.equalsIgnoreCase("D") && !playerMove.equalsIgnoreCase("A"))
+                            {
+                                clearConsole();
+                                System.out.println("------------------------------");
+                                System.out.println(hunt.cryptidFight());
+                                System.out.println("Attack (A) or Defend (D)? ");
+                                playerMove = scan.nextLine();
+                            }
+                            if (playerMove.equalsIgnoreCase("D")) {
+                                hunt.cryptidAttack();
+
+                                clearConsole();
+                                System.out.println("------------------------------");
+                                hunt.block();
+                                System.out.println("You blocked " + hunt.getBeastDmg() + " damage!");
+                            }
+                            else {
+                                hunt.attack();
+                                hunt.cryptidAttack();
+                                hunt.updateCryptidStats();
+                                hunt.updatePlayerStats();
+
+                                clearConsole();
+                                System.out.println("------------------------------");
+                                System.out.println("The cryptid dealt " + hunt.getBeastDmg() + " damage!");
+                                System.out.println("You dealt " + hunt.getPlayerDmg() + " damage!");
+                            }
+                        }
+                        System.out.println(hunt.cryptidFight());
                     }
 
                     System.out.println("\nLeave? (y)\nOr press any key to redo.");

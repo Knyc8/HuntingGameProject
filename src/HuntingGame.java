@@ -3,7 +3,7 @@ public class HuntingGame {
     private static int numHunts = 0;
     private int playerHp = 10;
     private int bearHp = 20;
-    private int cryptidHp = 50;
+    private int cryptidHp = 40;
     private boolean isBlocking = false;
     private int playerDmg = 0;
     private int beastDmg = 0;
@@ -26,8 +26,8 @@ public class HuntingGame {
      */
     public String getBeast() {
         int beastChance = (int) (Math.random() * 15) + 1;
-        String beastType = "bear";
-        if (beastChance <= 10)
+        String beastType = "cryptid";
+        /*if (beastChance <= 10)
         {
             beastType = "bird";
         }
@@ -38,11 +38,13 @@ public class HuntingGame {
         else
         {
             beastType = "cryptid";
-        }
+        }*/
         return beastType;
     }
 
-    /*bird-related code:*/
+
+
+    /*bird-related code: */
     public String huntBird(String skyGrid, int guessShot, int birdPos)
     {
         if (birdPos != guessShot)
@@ -53,7 +55,18 @@ public class HuntingGame {
         return skyGrid.substring(0, 2 * guessShot - 1) + "O" + skyGrid.substring(2 * guessShot);
     }
 
-    /*player-related code:*/
+
+
+    /*player-related code: */
+    public void resetStats() {
+        playerHp = 10;
+        bearHp = 20;
+        cryptidHp = 40;
+        isBlocking = false;
+        playerDmg = 0;
+        beastDmg = 0;
+    }
+
     public void attack() {
         isBlocking = false;
         int damage = (int)(Math.random() * 6) + 1;
@@ -90,14 +103,13 @@ public class HuntingGame {
         return playerDmg;
     }
 
-    //bear-related code:
-    public void resetStats() {
-        playerHp = 10;
-        bearHp = 20;
-        isBlocking = false;
-        playerDmg = 0;
-        beastDmg = 0;
+    public int getBeastDmg() {
+        return beastDmg;
     }
+
+
+
+    /*bear-related code: */
     public String bearFight()
     {
         if (playerHp <= 0) {
@@ -142,7 +154,54 @@ public class HuntingGame {
         return bearHp;
     }
 
-    public int getBeastDmg() {
-        return beastDmg;
+
+
+
+
+    /*Cryptid-related code: */
+    public String cryptidFight()
+    {
+        if (playerHp <= 0) {
+            playerHp = 0;
+            HuntingStore.updateBal(-HuntingStore.getBalance() / 2);
+            return "Cryptid health: " + cryptidHp +
+                    "\nYour health: " + playerHp +
+                    "\nYou collapse onto the floor." +
+                    "\nThe cryptid consumes you." +
+                    "\nYour balance is now halved.";
+        }
+        else if (cryptidHp <= 0) {
+            cryptidHp = 0;
+            HuntingStore.addHuntItems("Cryptid Evidence");
+            return "Cryptid health: " + cryptidHp +
+                    "\nYour health: " + playerHp +
+                    "\nThe cryptid falls to the ground." +
+                    "\nA piece of cryptid evidence is added to your inventory.";
+        }
+        else {
+            return "Cryptid health: " + cryptidHp +
+                    "\nYour health: " + playerHp;
+        }
+    }
+
+    public void cryptidAttack() {
+        int damage = (int)(Math.random() * 6) + 1;
+        if (damage <= 5)
+        {
+            beastDmg = 0;
+        }
+        else
+        {
+            beastDmg = 5;
+        }
+    }
+
+    public void updateCryptidStats()
+    {
+        cryptidHp -= playerDmg;
+    }
+
+    public int getCryptidHp() {
+        return cryptidHp;
     }
 }

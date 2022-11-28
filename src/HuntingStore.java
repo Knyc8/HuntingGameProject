@@ -28,18 +28,19 @@ public class HuntingStore {
                 Buy:
                 1. Feather hat - $8
                 2. Bear-skin rug - $15
+                3. Preserved Cryptid Remains - $200
                 ------------------------------
-                "Current balance: $""" + String.format("%.2f", balance) +
+                Current balance: $""" + String.format("%.2f", balance) +
                 "\n" + items + "\n" + boughtItems +
                 "\n------------------------------";
     }
 
-    public double getBalance() //returns the current balance of the user
+    public static double getBalance() //returns the current balance of the user
     {
         return balance;
     }
 
-    public void updateBal(double value)
+    public static void updateBal(double value)
     {
         balance += value;
     }
@@ -77,6 +78,10 @@ public class HuntingStore {
         if (buyItem.equals("2"))
         {
             return  (balance >= 15);
+        }
+        if (buyItem.equals("3"))
+        {
+            return  (balance >= 200);
         }
         return false;
     }
@@ -129,6 +134,11 @@ public class HuntingStore {
         {
             addBoughtItems("Bear-skin rug");
             updateBal(-15);
+        }
+        if (buyItem.equals("3"))
+        {
+            addBoughtItems("Preserved Cryptid Remains");
+            updateBal(-200);
         }
     }
 }
