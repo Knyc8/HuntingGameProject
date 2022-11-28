@@ -58,7 +58,7 @@ public class HuntingClient {
                     System.out.println("You come across a wild " + beast + ".");
                     if (beast.equals("bird"))
                     {
-                        hunt.updateNumhunts();
+                        hunt.updateNumHunts();
                         int numShot = 3;
                         int birdPos = (int) (Math.random() * 5) + 1;
                         System.out.println("------------------------------");
@@ -116,7 +116,7 @@ public class HuntingClient {
                         The bear has 20 hit points.
                         It has a 2/3 chance of dealing 1 damage, and a 1/3 chance of dealing 2.
                         """);
-                        hunt.updateNumhunts();
+                        hunt.updateNumHunts();
                         hunt.resetStats();
                         while (hunt.getBearHp() > 0 && hunt.getPlayerHp() > 0) {
                             System.out.println(hunt.bearFight());
@@ -161,7 +161,7 @@ public class HuntingClient {
                         The cryptid has 40 hit points.
                         It has a 1/6 chance of dealing 5 damage to the player.
                         """);
-                        hunt.updateNumhunts();
+                        hunt.updateNumHunts();
                         hunt.resetStats();
                         while (hunt.getCryptidHp() > 0 && hunt.getPlayerHp() > 0) {
                             System.out.println(hunt.cryptidFight());

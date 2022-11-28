@@ -28,7 +28,7 @@ public class HuntingGame {
      *
      * Adds 1 to the number of Hunts every time the player inputs "H" for hunt.
      */
-    public void updateNumhunts()
+    public void updateNumHunts()
     {
         numHunts++;
     }
