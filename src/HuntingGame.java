@@ -1,3 +1,6 @@
+/***
+ * The HuntingGame class is responsible for the logic behind the mini-games for the bird, bear, and cryptid choices
+ */
 public class HuntingGame {
     //private variables
     private static int numHunts = 0;
@@ -8,13 +11,19 @@ public class HuntingGame {
     private int playerDmg = 0;
     private int beastDmg = 0;
 
-    //default constructor
+    /*default constructor*/
 
+    /***
+     * @return the current number of hunts the user has completed as an integer.
+     */
     public int getNumHunts()
     {
         return numHunts;
     }
 
+    /***
+     * Adds 1 to the number of Hunts every time the player inputs "H" for hunt.
+     */
     public void updateNumhunts()
     {
         numHunts++;
@@ -45,6 +54,14 @@ public class HuntingGame {
 
 
     /*bird-related code: */
+    /***
+     * The huntBird method will return the display for the sky in which the mini-game is played.
+     *
+     * @param skyGrid a String representing the original layout of the sky.
+     * @param guessShot an integer representing the user's inputted guess.
+     * @param birdPos an integer representing the bird's position in the sky.
+     * @return a String that representing either a hit or a miss by the player.
+     */
     public String huntBird(String skyGrid, int guessShot, int birdPos)
     {
         if (birdPos != guessShot)
@@ -58,6 +75,10 @@ public class HuntingGame {
 
 
     /*player-related code: */
+
+    /***
+     * The resetStats method defaults the player health, beasts' health, player damage, beast damage, and whether the player is blocking to its default value.
+     */
     public void resetStats() {
         playerHp = 10;
         bearHp = 20;
@@ -67,6 +88,10 @@ public class HuntingGame {
         beastDmg = 0;
     }
 
+    /***
+     * The attack method will pick a random number between 1 and 6.
+     * Using that value, it decides whether the player does 1, 3, or 10 damage by setting playerDmg to the value.
+     */
     public void attack() {
         isBlocking = false;
         int damage = (int)(Math.random() * 6) + 1;
@@ -83,26 +108,43 @@ public class HuntingGame {
         }
     }
 
+    /***
+     * The block method sets isBlocking to true so any damage done by the beast is mitigated.
+     */
     public void block() {
         isBlocking = true;
     }
 
+    /***
+     * The updatePlayerStats updates the health of the player.
+     * If isBlocking is true, the player's health remains unchanged.
+     * If isBlocking is false, the player's health is subtracted by the value of beastDmg.
+     */
     public void updatePlayerStats() {
-        if (isBlocking == true)
+        if (isBlocking)
         {
-            playerDmg = 0;
+            beastDmg = 0;
         }
         playerHp -= beastDmg;
     }
 
+    /***
+     * @return an integer representing the player's health.
+     */
     public int getPlayerHp() {
         return playerHp;
     }
 
+    /***
+     * @return an integer representing the player's damage.
+     */
     public int getPlayerDmg() {
         return playerDmg;
     }
 
+    /***
+     * @return an integer representing the beast's damage.
+     */
     public int getBeastDmg() {
         return beastDmg;
     }
@@ -110,6 +152,13 @@ public class HuntingGame {
 
 
     /*bear-related code: */
+
+    /***
+     * The bearFight method contains the display of the stats of the player and the bear, which the client class prints.
+     * It also determines whether the player has won or lost based on the health of the player or the bear.
+     *
+     * @return a String representing a formatted display of the bear's health, the player's health, and whether the player won or lost.
+     */
     public String bearFight()
     {
         if (playerHp <= 0) {
@@ -133,6 +182,10 @@ public class HuntingGame {
         }
     }
 
+    /***
+     * The bearAttack method will pick a number between 1 and 3.
+     * Using that number, it will decide whether the bear does 1 or 3 damage by setting beastDmg to the values.
+     */
     public void bearAttack() {
         int damage = (int)(Math.random() * 3) + 1;
         if (damage <= 2)
@@ -145,11 +198,17 @@ public class HuntingGame {
         }
     }
 
+    /***
+     * The updateBearStats subtracts the bear's health by the damage dealt by the player.
+     */
     public void updateBearStats()
     {
         bearHp -= playerDmg;
     }
 
+    /***
+     * @return an integer representing the bear's health.
+     */
     public int getBearHp() {
         return bearHp;
     }
@@ -159,6 +218,13 @@ public class HuntingGame {
 
 
     /*Cryptid-related code: */
+
+    /***
+     * The cryptidFight method contains the display of the stats of the player and the cryptid, which the client class prints.
+     * It also determines whether the player has won or lost based on the health of the player or the cryptid.
+     *
+     * @return a String representing a formatted display of the cryptid's health, the player's health, and whether the player won or lost.
+     */
     public String cryptidFight()
     {
         if (playerHp <= 0) {
@@ -184,6 +250,10 @@ public class HuntingGame {
         }
     }
 
+    /***
+     * The crytidAttack method picks a number between 1 and 6.
+     * Using that value, it decides whether the cryptid deals 0 or 5 damage by setting beastDmg to the values.
+     */
     public void cryptidAttack() {
         int damage = (int)(Math.random() * 6) + 1;
         if (damage <= 5)
@@ -196,11 +266,17 @@ public class HuntingGame {
         }
     }
 
+    /***
+     * The updateCryptidStats method subtracts the cryptid's health by the damage dealt by the player.
+     */
     public void updateCryptidStats()
     {
         cryptidHp -= playerDmg;
     }
 
+    /***
+     * @return an integer representing the cryptid's health.
+     */
     public int getCryptidHp() {
         return cryptidHp;
     }
