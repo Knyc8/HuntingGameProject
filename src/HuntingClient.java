@@ -273,6 +273,7 @@ public class HuntingClient {
     }
 
     /***
+     *Returns the menu display.
      *
      * @param event a string that represents the initial event the user wants to choose
      * @return a string that is the inputted event choice
