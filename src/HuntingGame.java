@@ -14,6 +14,8 @@ public class HuntingGame {
     /*default constructor*/
 
     /***
+     * Returns the number of hunts the user has completed.
+     *
      * @return the current number of hunts the user has completed as an integer.
      */
     public int getNumHunts()
@@ -22,6 +24,8 @@ public class HuntingGame {
     }
 
     /***
+     * Updates the number of hunts the user has completed.
+     *
      * Adds 1 to the number of Hunts every time the player inputs "H" for hunt.
      */
     public void updateNumhunts()
@@ -30,7 +34,8 @@ public class HuntingGame {
     }
 
     /***
-     * Simulates a random number generator between 1 and 15
+     * Chooses the beast that the user hunts.
+     *
      * @return either "bird", "bear", or "cryptid" based on the number chosen by the Random method
      */
     public String getBeast() {
@@ -129,6 +134,8 @@ public class HuntingGame {
     }
 
     /***
+     * Returns the player's health.
+     *
      * @return an integer representing the player's health.
      */
     public int getPlayerHp() {
@@ -136,6 +143,8 @@ public class HuntingGame {
     }
 
     /***
+     * Returns the player's damage.
+     *
      * @return an integer representing the player's damage.
      */
     public int getPlayerDmg() {
@@ -143,6 +152,8 @@ public class HuntingGame {
     }
 
     /***
+     * Returns the beast's damage.
+     *
      * @return an integer representing the beast's damage.
      */
     public int getBeastDmg() {
@@ -207,6 +218,8 @@ public class HuntingGame {
     }
 
     /***
+     * Returns the bear's health.
+     *
      * @return an integer representing the bear's health.
      */
     public int getBearHp() {
@@ -275,6 +288,8 @@ public class HuntingGame {
     }
 
     /***
+     * Returns the cryptid's health.
+     *
      * @return an integer representing the cryptid's health.
      */
     public int getCryptidHp() {

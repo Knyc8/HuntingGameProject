@@ -61,6 +61,8 @@ public class HuntingStore {
     }
 
     /***
+     * Returns the player's balance.
+     *
      * @return a double representing the player's current balance.
      */
     public static double getBalance() //returns the current balance of the user
@@ -79,6 +81,8 @@ public class HuntingStore {
     }
 
     /***
+     * Returns the player's items.
+     *
      * @return a String representing the current items the player has in their inventory.
      */
     public String getAllItems() {

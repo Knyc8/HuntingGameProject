@@ -289,7 +289,7 @@ public class HuntingClient {
     }
 
     /***
-     * simulates clearing console by skipping lines
+     * The clearConsole method simulates clearing console by skipping lines
      */
     public static void clearConsole()
     {
@@ -304,9 +304,10 @@ public class HuntingClient {
     }
 
     /***
+     *The isANumber method tests if the string inputted is a number.
      *
-     * @param testStr is a string that represents the inputted custom starting balance
-     * @return whether the string is numeric
+     * @param testStr a string representing the inputted custom starting balance.
+     * @return a boolean representing whether the string is a number or not.
      */
     public static boolean isANumber(String testStr) {
         if (testStr == null) {
