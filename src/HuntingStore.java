@@ -6,19 +6,21 @@
 public class HuntingStore {
     /*variables*/
     private static double balance;
-    private static String items = "Hunt items: ";
-    private String boughtItems = "Bought items: ";
+    private static String items;
+    private String boughtItems;
 
     /*Constructors*/
 
     /***
      * 0-parameter constructor for the HuntingStore class.
      * It creates an instance of a HuntingStore.
-     * It defaults the player's balance to $0.
+     * It defaults the player's balance to $0, and defaults the inventory variables to empty
      */
     public HuntingStore()  //defaults the balance to $50
     {
         balance = 0;
+        items = "Hunt items: ";
+        boughtItems = "Bought items: ";
     }
 
     /***

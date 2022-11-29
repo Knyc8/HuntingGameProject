@@ -3,15 +3,26 @@
  */
 public class HuntingGame {
     //private variables
-    private static int numHunts = 0;
-    private int playerHp = 10;
-    private int bearHp = 20;
-    private int cryptidHp = 40;
-    private boolean isBlocking = false;
-    private int playerDmg = 0;
-    private int beastDmg = 0;
+    private static int numHunts;
+    private int playerHp;
+    private int bearHp;
+    private int cryptidHp;
+    private boolean isBlocking;
+    private int playerDmg;
+    private int beastDmg;
 
-    /*default constructor*/
+    /***
+     * Sets player stats, bear stats, and the number of hunts to a default value
+     */
+    public HuntingGame() {
+        numHunts = 0;
+        playerHp = 10;
+        bearHp = 20;
+        cryptidHp = 40;
+        isBlocking = false;
+        playerDmg = 0;
+        beastDmg = 0;
+    }
 
     /***
      * Returns the number of hunts the user has completed.
@@ -225,8 +236,6 @@ public class HuntingGame {
     public int getBearHp() {
         return bearHp;
     }
-
-
 
 
 
